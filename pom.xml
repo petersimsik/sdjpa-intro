@@ -39,6 +39,10 @@
 			<version>2.7.5</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -62,7 +66,7 @@
 					<propertyFileWillOverride>true</propertyFileWillOverride>
 					<propertyFile>target/classes/liquibase.properties</propertyFile>
 					-->
-					<url>jdbc:mariadb://localhost:3306/bookdb?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=UTC</url>
+					<url>jdbc:mariadb://raspberrypi:3306/bookdb?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=UTC</url>
 					<username>bookadmin</username>
 					<password>bookadminpwd</password>
 					<outputChangeLogFile>changelog.xml</outputChangeLogFile>
