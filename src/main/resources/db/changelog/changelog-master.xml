@@ -12,4 +12,5 @@
     <include  file="db/changelog/addAuthor.xml"/>
     <include  file="db/changelog/add-author-id-collumn.xml"/>
     <include  file="db/changelog/id-autoincrement.xml"/>
+    <include  file="db/changelog/add-author_uuid.xml"/>
 </databaseChangeLog>
