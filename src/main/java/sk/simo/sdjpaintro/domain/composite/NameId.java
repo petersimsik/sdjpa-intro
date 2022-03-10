@@ -1,8 +1,11 @@
 package sk.simo.sdjpaintro.domain.composite;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
+//embeddable annotation is needed in order to embeddedId in AuthorEmbedded
 public class NameId implements Serializable {
     private String firstName;
     private String lastName;

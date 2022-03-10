@@ -12,6 +12,7 @@ import sk.simo.sdjpaintro.domain.AuthorUuid;
 import sk.simo.sdjpaintro.domain.BookNatural;
 import sk.simo.sdjpaintro.domain.BookUuid;
 import sk.simo.sdjpaintro.domain.composite.AuthorComposite;
+import sk.simo.sdjpaintro.domain.composite.AuthorEmbedded;
 import sk.simo.sdjpaintro.domain.composite.NameId;
 import sk.simo.sdjpaintro.repositories.*;
 
@@ -38,6 +39,20 @@ public class MySqlIntegrationTest {
 
     @Autowired
     AuthorCompositeRepository authorCompositeRepository;
+
+    @Autowired
+    AuthorEmbeddedRepository authorEmbeddedRepository;
+
+    @Test
+    void saveAuthorEmbeddedTest(){
+        NameId nameId = new NameId("Peter", "Simsik");
+        AuthorEmbedded author = new AuthorEmbedded(nameId);
+        AuthorEmbedded savedAuthor = authorEmbeddedRepository.save(author);
+        assertThat(savedAuthor).isNotNull();
+
+        AuthorEmbedded fetched = authorEmbeddedRepository.getById(nameId);
+        assertThat(fetched).isNotNull();
+    }
 
     @Test
     void saveAuthorCompositeTest() {
