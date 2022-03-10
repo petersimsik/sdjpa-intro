@@ -20,10 +20,10 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         bookRepository.deleteAll();
 
-        Book book1 = new Book("Domain driven design", "123", "RandomHouse");
+        Book book1 = new Book("Domain driven design", "123", "RandomHouse", null);
         Book savedBook1 = bookRepository.save(book1);
 
-        Book book2 = new Book("Spring in action", "625165", "Author");
+        Book book2 = new Book("Spring in action", "625165", "Author", null);
         Book savedbook2 = bookRepository.save(book2);
 
         //get list of book that were saved
