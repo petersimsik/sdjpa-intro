@@ -11,10 +11,9 @@ import org.springframework.test.context.ActiveProfiles;
 import sk.simo.sdjpaintro.domain.AuthorUuid;
 import sk.simo.sdjpaintro.domain.BookNatural;
 import sk.simo.sdjpaintro.domain.BookUuid;
-import sk.simo.sdjpaintro.repositories.AuthorUuidRepository;
-import sk.simo.sdjpaintro.repositories.BookNaturalRepository;
-import sk.simo.sdjpaintro.repositories.BookRepository;
-import sk.simo.sdjpaintro.repositories.BookUuidRepository;
+import sk.simo.sdjpaintro.domain.composite.AuthorComposite;
+import sk.simo.sdjpaintro.domain.composite.NameId;
+import sk.simo.sdjpaintro.repositories.*;
 
 import java.util.UUID;
 
@@ -36,6 +35,27 @@ public class MySqlIntegrationTest {
 
     @Autowired
     BookNaturalRepository bookNaturalRepository;
+
+    @Autowired
+    AuthorCompositeRepository authorCompositeRepository;
+
+    @Test
+    void saveAuthorCompositeTest() {
+        AuthorComposite author = new AuthorComposite();
+        author.setFirstName("Peter");
+        author.setLastName("Simsik");
+        author.setCountry("SK");
+        AuthorComposite savedAuthor = authorCompositeRepository.save(author);
+
+        assertThat(savedAuthor).isNotNull();
+
+        NameId id = new NameId();
+        id.setFirstName("Peter");
+        id.setLastName("Simsik");
+
+        AuthorComposite fetched = authorCompositeRepository.getById(id);
+        assertThat(fetched).isNotNull();
+    }
 
     @Test
     void saveBookNaturalTest(){

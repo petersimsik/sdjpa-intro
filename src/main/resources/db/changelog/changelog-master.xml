@@ -15,4 +15,5 @@
     <include  file="db/changelog/add-author_uuid.xml"/>
     <include  file="db/changelog/add-book_uuid.xml"/>
     <include  file="db/changelog/add-book_natural.xml"/>
+    <include  file="db/changelog/add-author_composite.xml"/>
 </databaseChangeLog>
