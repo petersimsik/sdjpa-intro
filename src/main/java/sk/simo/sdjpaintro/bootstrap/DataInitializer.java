@@ -5,19 +5,23 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import sk.simo.sdjpaintro.domain.AuthorUuid;
 import sk.simo.sdjpaintro.domain.Book;
+import sk.simo.sdjpaintro.domain.BookUuid;
 import sk.simo.sdjpaintro.repositories.AuthorUuidRepository;
 import sk.simo.sdjpaintro.repositories.BookRepository;
+import sk.simo.sdjpaintro.repositories.BookUuidRepository;
 
 @Component
 @Profile({"local", "default"})
 public class DataInitializer implements CommandLineRunner {
 
     private final BookRepository bookRepository;
+    private final BookUuidRepository bookUuidRepository;
     private final AuthorUuidRepository authorUuidRepository;
 
-    public DataInitializer(BookRepository bookRepository, AuthorUuidRepository authorUuidRepository){
+    public DataInitializer(BookRepository bookRepository, AuthorUuidRepository authorUuidRepository, BookUuidRepository bookUuidRepository){
         this.bookRepository = bookRepository;
         this.authorUuidRepository = authorUuidRepository;
+        this.bookUuidRepository = bookUuidRepository;
     }
 
     @Override
@@ -39,6 +43,13 @@ public class DataInitializer implements CommandLineRunner {
         authorUuid.setFirstName("Joe");
         authorUuid.setLastName("Buck");
         AuthorUuid savedAuthor = authorUuidRepository.save(authorUuid);
-        System.out.println("Saved Author: " + savedAuthor.getId());
+        System.out.println("Saved Author UUID: " + savedAuthor.getId());
+
+        bookUuidRepository.deleteAll();
+
+        BookUuid bookUuid = new BookUuid();
+        bookUuid.setTitle("All about UUIDs");
+        BookUuid savedBookUuid = bookUuidRepository.save(bookUuid);
+        System.out.println("Saved Book UUID: " + savedBookUuid.getId());
     }
 }
