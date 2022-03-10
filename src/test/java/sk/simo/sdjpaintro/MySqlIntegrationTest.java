@@ -9,8 +9,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import sk.simo.sdjpaintro.domain.AuthorUuid;
+import sk.simo.sdjpaintro.domain.BookNatural;
 import sk.simo.sdjpaintro.domain.BookUuid;
 import sk.simo.sdjpaintro.repositories.AuthorUuidRepository;
+import sk.simo.sdjpaintro.repositories.BookNaturalRepository;
 import sk.simo.sdjpaintro.repositories.BookRepository;
 import sk.simo.sdjpaintro.repositories.BookUuidRepository;
 
@@ -31,6 +33,19 @@ public class MySqlIntegrationTest {
 
     @Autowired
     AuthorUuidRepository authorUuidRepository;
+
+    @Autowired
+    BookNaturalRepository bookNaturalRepository;
+
+    @Test
+    void saveBookNaturalTest(){
+        BookNatural bookNatural = new BookNatural();
+        bookNatural.setTitle("My book");
+        BookNatural saved = bookNaturalRepository.save(bookNatural);
+        assertThat(saved).isNotNull();
+
+        assertThat(bookNaturalRepository.getById(saved.getTitle())).isNotNull();
+    }
 
     @Test
     void saveAuthorUuidTest() {
